@@ -168,6 +168,9 @@ h6 {
 }
 
 .navbar__menu-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
   cursor: pointer;
