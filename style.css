@@ -1,0 +1,658 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/* --- Base Styles & Resets --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 1rem; /* Base font size for rem units (16px) */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden; /* Prevents horizontal scroll from mobile menu */
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Inherit color unless explicitly set */
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Removes extra space below images */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+/* --- Utility Classes --- */
+.divider {
+  width: 9.375rem; /* 150px */
+  height: 0.25rem; /* 4px */
+  background-color: #fc036b;
+  margin: 1rem auto; /* Centered by default */
+  border-radius: 5px;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 1.875rem; /* 30px */
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button--primary {
+  background-color: #fc036b;
+  color: #f5f5f5;
+  border: 1px solid #fc036b;
+}
+
+.button--primary:hover {
+  background-color: #e0025c; /* Slightly darker primary */
+  transform: translateY(-2px);
+}
+
+.button--secondary {
+  background-color: #484872;
+  color: #f5f5f5;
+  border: 1px solid #484872;
+}
+
+.button--secondary:hover {
+  background-color: #3b3b5b; /* Slightly darker secondary */
+  transform: translateY(-2px);
+}
+
+/* --- Section Base Styling --- */
+.section {
+  padding: 4rem 2rem; /* 64px 32px */
+  margin: 0 auto;
+  max-width: 75rem; /* 1200px */
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: 4rem; /* Standard space below section headers */
+}
+
+.section__title {
+  font-size: 1.8rem; /* Mobile default */
+  color: #484872;
+}
+
+/* --- Navbar --- */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensures navbar itself is 100% width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem; /* Adjusted padding for better mobile fit */
+  color: #f5f5f5;
+  z-index: 1000;
+}
+
+.navbar__logo {
+  font-size: 1.8rem; /* 28.8px */
+  font-weight: 700;
+  color: #f5f5f5;
+  z-index: 1001; /* Ensure logo is above mobile menu when open */
+}
+
+.navbar__nav-list {
+  display: flex;
+  flex-direction: column; /* Mobile default */
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  max-width: 18.75rem; /* 300px */
+  height: 100vh;
+  background-color: #484872;
+  transform: translateX(100%); /* Hidden by default */
+  transition: transform 0.3s ease-in-out;
+  padding-top: 5rem; /* More space for logo/menu button */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Adjusted z-index to be below menu button */
+}
+
+.navbar__nav-list--active {
+  transform: translateX(0); /* Slide in */
+}
+
+.navbar__nav-item {
+  margin-bottom: 1.5rem; /* Slightly less space on mobile nav items */
+  text-align: center;
+}
+
+.navbar__nav-link {
+  font-size: 1.125rem; /* 18px */
+  padding: 0.5rem 1rem;
+  display: block;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar__nav-link:hover,
+.navbar__nav-link--active {
+  color: #fc036b;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.navbar__nav-item--cta {
+  margin-top: 2rem;
+}
+
+.navbar__menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: block; /* Show on mobile */
+  z-index: 1001; /* Ensure menu button is above nav list */
+}
+
+.navbar__menu-button img {
+  width: 2.5rem; /* 40px */
+  height: 2.5rem;
+}
+
+/* --- Hero Header --- */
+.hero-header {
+  width: 100%; /* Explicitly ensure 100% width */
+  min-height: 100vh;
+  background: url(./images/header-bg.png) no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  color: #f5f5f5;
+  padding-bottom: 4rem; /* 64px */
+  position: relative;
+}
+
+.hero-header__content {
+  margin-bottom: 4rem;
+  padding: 0 1.5rem; /* Slightly reduced padding for very small screens */
+  max-width: 75rem; /* Constrain content width inside the 100% width hero */
+  width: 100%; /* Ensure it uses max-width effectively */
+}
+
+.hero-header__subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-header__title {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* --- Events Section --- */
+.events-section__grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column for mobile */
+  gap: 3rem; /* Slightly less gap on mobile for better flow */
+  justify-items: center;
+  align-items: start;
+}
+
+.event-card {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding-bottom: 2rem;
+  max-width: 25rem; /* Limit card width on mobile for better readability */
+}
+
+.event-card__image {
+  width: 100%;
+  height: 12.5rem; /* 200px */
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.event-card__title {
+  font-size: 1.5rem; /* 24px */
+  color: #484872;
+  margin-bottom: 0.625rem; /* 10px */
+  padding: 0 2rem;
+}
+
+.event-card__description {
+  color: #7c7c7c;
+  font-size: 0.9375rem; /* 15px */
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+}
+
+/* --- Explore Section --- */
+.explore-section {
+  background: url("./images/bg2.png") no-repeat center center/cover;
+  min-height: 80vh; /* Adjust for content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+.explore-section__content {
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  border-radius: 5px;
+  max-width: 37.5rem; /* 600px */
+}
+
+.explore-section__title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: inherit; /* Inherit from parent */
+}
+
+.explore-section__description {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- Tours Section --- */
+.tours-section {
+  display: flex;
+  flex-direction: column; /* Mobile default */
+  gap: 3rem; /* Slightly less gap on mobile for better flow */
+  align-items: center;
+}
+
+.tours-section__content {
+  text-align: center; /* Center text on mobile */
+}
+
+.tours-section__title {
+  font-size: 1.8rem;
+  color: #484872;
+  margin-bottom: 1rem; /* Adjust if using .section__header for spacing */
+}
+
+.tours-section__content .divider {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tours-section__description {
+  margin: 2rem 0;
+  color: #7c7c7c;
+}
+
+.tours-section__gallery {
+  display: grid;
+  /* Using auto-fit with minmax to create flexible columns */
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0.75rem; /* Slightly reduced gap */
+  width: 100%;
+}
+
+.tours-section__gallery img {
+  width: 100%;
+  aspect-ratio: 4/3; /* Maintain 4:3 aspect ratio */
+  max-height: 350px; /* Prevent images from becoming too tall */
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- About Section --- */
+.about-section {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  align-items: center;
+  gap: 3rem; /* Space between content and image */
+  text-align: center; /* Center text on mobile */
+}
+
+.about-section__content {
+  max-width: 40rem; /* Limit content width */
+}
+
+.about-section__title {
+  /* This title is inside a .section, so its spacing is often handled by .section__header.
+     If it's used independently, this margin is fine. */
+  margin-bottom: 1rem;
+  font-size: 1.8rem; /* Consistent with other section titles on mobile */
+}
+
+.about-section__description {
+  color: #555;
+  margin-bottom: 1rem; /* Space between paragraphs */
+}
+
+.about-section__description:last-of-type {
+  margin-bottom: 2rem; /* Space before the button */
+}
+
+.about-section__image-container {
+  width: 100%;
+  max-width: 30rem; /* Limit image container width */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.about-section__image {
+  width: 100%;
+  height: 18.75rem; /* 300px default height */
+  object-fit: cover;
+}
+
+/* --- Contact Section --- */
+.contact-section__intro {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #555;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form {
+  max-width: 40rem; /* Limit form width */
+  margin: 0 auto; /* Center the form */
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between form groups */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #484872;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+  border-color: #fc036b;
+  box-shadow: 0 0 0 3px rgba(252, 3, 107, 0.2); /* Pink glow on focus */
+  outline: none; /* Remove default outline */
+}
+
+.form-group textarea {
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 6rem;
+}
+
+.contact-form .button--primary {
+  width: fit-content; /* Adjust button width to content */
+  align-self: center; /* Center the button within the flex container */
+  margin-top: 1rem; /* Add some space above the button */
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: #484872;
+  color: #f5f5f5;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.875rem; /* 14px */
+}
+
+.footer__text {
+  margin: 0.5rem 0;
+  opacity: 0.9;
+}
+
+/* --- Media Queries --- */
+
+/* Tablet breakpoint - min-width 768px */
+@media (min-width: 768px) {
+  /* Navbar */
+  .navbar {
+    padding: 2rem 3rem;
+  }
+
+  .navbar__nav-list {
+    flex-direction: row; /* Horizontal for tablet */
+    align-items: center;
+    position: static; /* No longer fixed position */
+    width: auto; /* Let content define width */
+    height: auto;
+    background-color: transparent; /* No background color */
+    transform: translateX(0); /* Always visible */
+    box-shadow: none;
+    padding-top: 0;
+    max-width: unset; /* Override mobile's max-width */
+  }
+
+  .navbar__nav-item {
+    margin-bottom: 0; /* No vertical margin */
+    margin-left: 1.5rem; /* Spacing between nav items */
+  }
+
+  .navbar__nav-link {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .navbar__nav-link:hover,
+  .navbar__nav-link--active {
+    background-color: transparent;
+    color: #fc036b;
+  }
+
+  .navbar__nav-item--cta {
+    margin-top: 0;
+  }
+
+  .navbar__menu-button {
+    display: none; /* Hide on larger screens */
+  }
+
+  /* Hero Header */
+  .hero-header__subtitle {
+    font-size: 1.8rem;
+  }
+
+  .hero-header__title {
+    font-size: 4rem;
+  }
+
+  /* Section Base Styling */
+  .section__title {
+    font-size: 2.5rem;
+  }
+
+  /* Events Section */
+  .events-section__grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(280px, 1fr)
+    ); /* Two columns, responsive */
+    gap: 4rem;
+  }
+
+  /* About Section */
+  .about-section {
+    flex-direction: row; /* Side-by-side on tablet */
+    text-align: left; /* Align text left */
+    justify-content: space-between;
+    align-items: center; /* Vertically align items */
+  }
+
+  .about-section__content {
+    flex: 1; /* Allow content to take available space */
+    padding-right: 3rem; /* Space between content and image */
+  }
+
+  .about-section__title {
+    font-size: 2.5rem; /* Consistent with other section titles */
+  }
+
+  .about-section__content .divider {
+    margin-left: 0; /* Align divider to the left */
+  }
+
+  .about-section__image-container {
+    flex: 1; /* Allow image container to take available space */
+    max-width: 50%; /* Adjust as needed */
+  }
+
+  .about-section__image {
+    height: 25rem; /* Increase height for tablet */
+  }
+
+  /* Explore Section */
+  .explore-section__content {
+    max-width: 45rem; /* 720px */
+  }
+
+  .explore-section__title {
+    font-size: 4rem;
+  }
+
+  /* Tours Section */
+  .tours-section {
+    flex-direction: row; /* Layout side-by-side */
+    justify-content: space-between;
+    align-items: flex-start; /* Align top */
+  }
+
+  .tours-section__content {
+    flex: 1; /* Take available space */
+    padding-right: 4rem;
+    text-align: left; /* Align text left */
+  }
+
+  .tours-section__content .divider {
+    margin-left: 0; /* Align divider left */
+  }
+
+  .tours-section__gallery {
+    flex: 1; /* Take available space */
+    /* FIX: Corrected repeat syntax and minmax value for better responsiveness */
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Desktop breakpoint - min-width 1024px */
+@media (min-width: 1024px) {
+  /* Navbar */
+  .navbar {
+    padding: 2rem 4rem; /* More padding on desktop */
+  }
+  .navbar__logo {
+    font-size: 2rem;
+  }
+
+  .navbar__nav-item {
+    margin-left: 2rem; /* Restore slightly more margin for larger screens */
+  }
+  .navbar__nav-link {
+    font-size: 1rem; /* Adjust font size for larger screens if needed */
+  }
+
+  /* Hero Header */
+  .hero-header__subtitle {
+    font-size: 2rem;
+  }
+
+  .hero-header__title {
+    font-size: 5rem;
+  }
+
+  /* Events Section */
+  .events-section__grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+  }
+
+  /* Explore Section */
+  .explore-section__content {
+    max-width: 50rem; /* 800px */
+  }
+
+  .explore-section__title {
+    font-size: 5rem;
+  }
+
+  /* Tours Section */
+  .tours-section__content {
+    flex-basis: 40%;
+  }
+  .tours-section__gallery {
+    flex-basis: 55%;
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+  .tours-section__gallery img {
+    height: 12.5rem; /* 200px */
+  }
+
+  /* About Section */
+  .about-section {
+    gap: 5rem; /* More space on desktop */
+  }
+
+  .about-section__content {
+    flex-basis: 50%; /* Give content more specific width */
+    padding-right: 0; /* Remove padding if not needed due to gap */
+  }
+
+  .about-section__image-container {
+    flex-basis: 40%; /* Give image more specific width */
+  }
+
+  .about-section__image {
+    height: 30rem; /* Increase height for desktop */
+  }
+}
